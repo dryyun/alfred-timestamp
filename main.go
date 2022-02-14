@@ -133,7 +133,7 @@ func defaultFeedback(now time.Time) {
 		{
 			time:     strconv.FormatInt(now.UnixNano()/1e6, 10),
 			subtitle: "ms int64",
-			arg:      strconv.FormatInt(now.Unix(), 10),
+			arg:      strconv.FormatInt(now.UnixNano()/1e6, 10),
 		},
 		{
 			time:     now.Format("2006-01-02"),
