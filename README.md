@@ -2,6 +2,8 @@
 
 Alfred Timestamp Workflow
 
+**_自用_**
+
 ## Workflow
 
 **Alfred Keyword: `ts`**
@@ -36,11 +38,3 @@ Download [alfred-workflow_kaba-ts.alfredworkflow](https://github.com/kabacloud/a
 
 Double-click the alfred-workflow_kaba-ts.alfredworkflow to install.
 
-## Develop
-
->Please refer to <https://github.com/mitchellh/gon>
-
-change your apple developer information in `config.json`.
-
-- run command `security find-identity -v` get your Developer ID Application certificate information.
-- run command `xcrun altool --list-providers -u "your apple id" -p "your App-Specific Password"` get your ProviderShortname.

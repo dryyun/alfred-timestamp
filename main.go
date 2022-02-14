@@ -102,7 +102,17 @@ func run() {
 				}
 			}
 		} else {
-			defaultFeedback(now)
+
+			i, err := strconv.ParseInt(tsArgs[1], 10, 64)
+			if err != nil {
+				defaultFeedback(now)
+			} else {
+				if len(tsArgs[1]) >= 13 {
+					defaultFeedback(time.UnixMilli(i))
+				} else {
+					defaultFeedback(time.Unix(i, 0))
+				}
+			}
 		}
 	default:
 		defaultFeedback(now)
@@ -118,6 +128,11 @@ func defaultFeedback(now time.Time) {
 		{
 			time:     strconv.FormatInt(now.Unix(), 10),
 			subtitle: "int64",
+			arg:      strconv.FormatInt(now.Unix(), 10),
+		},
+		{
+			time:     strconv.FormatInt(now.UnixNano()/1e6, 10),
+			subtitle: "ms int64",
 			arg:      strconv.FormatInt(now.Unix(), 10),
 		},
 		{
