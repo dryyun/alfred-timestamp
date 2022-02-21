@@ -38,6 +38,7 @@ import (
 
 	aw "github.com/deanishe/awgo"
 
+	nowlib "github.com/jinzhu/now"
 	str2duration "github.com/xhit/go-str2duration/v2"
 )
 
@@ -102,17 +103,28 @@ func run() {
 				}
 			}
 		} else {
-
-			i, err := strconv.ParseInt(tsArgs[1], 10, 64)
-			if err != nil {
-				defaultFeedback(now)
-			} else {
-				if len(tsArgs[1]) >= 13 {
-					defaultFeedback(time.UnixMilli(i))
+			npt, npterr := nowlib.Parse(tsArgs[1])
+			if npterr != nil {
+				i, err := strconv.ParseInt(tsArgs[1], 10, 64)
+				if err != nil {
+					defaultFeedback(now)
 				} else {
-					defaultFeedback(time.Unix(i, 0))
+					if len(tsArgs[1]) >= 13 {
+						defaultFeedback(time.UnixMilli(i))
+					} else {
+						defaultFeedback(time.Unix(i, 0))
+					}
 				}
+			} else {
+				defaultFeedback(npt)
 			}
+		}
+	case 3:
+		npt, npterr := nowlib.Parse(tsArgs[1] + " " + tsArgs[2])
+		if npterr != nil {
+			defaultFeedback(now)
+		} else {
+			defaultFeedback(npt)
 		}
 	default:
 		defaultFeedback(now)
